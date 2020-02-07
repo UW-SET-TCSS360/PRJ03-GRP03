@@ -1,3 +1,3 @@
-READ ME
+# READ ME
 
-Weather Station project for the Vantage Vue system.
+### Weather Station project for the Vantage Vue system.
