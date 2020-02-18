@@ -26,7 +26,8 @@ import javax.swing.JPanel;
 /**
  * The main GUI for the weather console.
  * 
- * @author Group 6
+ * @author Group 1, Ilya Bokov, Elias Salmo, Nicholas Babcock
+ * @version 13 February, 2020
  */
 public class WeatherGUI extends JFrame {
 	/**
@@ -42,7 +43,12 @@ public class WeatherGUI extends JFrame {
     /**
      * The number of moon phase images there are, will be used to create the ImageIcon array.
      */
-    private static final int NUM_IMAGES = 8;
+    private static final int NUM_MOON_IMAGES = 8;
+    
+    /**
+     * The number of weather icons there will be. Will be used to create an ImageIcon array for weather icons.
+     */
+    private static final int NUM_WEATHER_ICONS = 8;
 
     /**
      * Shows the temperature
@@ -75,7 +81,10 @@ public class WeatherGUI extends JFrame {
     /**
      * holds the images for each moon phase
      */
-    private ImageIcon[] moonImages = new ImageIcon[NUM_IMAGES];
+    private ImageIcon[] moonImages = new ImageIcon[NUM_MOON_IMAGES];
+    
+    private ImageIcon[] weatherIcon = new ImageIcon[NUM_WEATHER_ICONS];
+    
     /**
      * Shows the rainfall
      */
@@ -96,7 +105,11 @@ public class WeatherGUI extends JFrame {
      * Shows the time of sunset
      */
     private JLabel sunsetReadout;
-
+    
+    /**
+     * Shows the weatherIcon.
+     */
+    private JLabel weatherLabel;
 
     /**
      * The method that will initialize the GUI to its default starting state.
@@ -128,14 +141,20 @@ public class WeatherGUI extends JFrame {
 
         graphPanel = new GraphPanel(getWidth()/2, getHeight()/2);
         windPanel = new WindPanel(getHeight()/9);
+        windPanel.setPreferredSize(new Dimension (150, 150));
 
         JPanel moonPanel = new JPanel();
         moonReadout = new JLabel();
-        moonReadout.setPreferredSize(new Dimension(110, 50));
+        moonReadout.setPreferredSize(new Dimension(110, 25));
         moonLabel = new JLabel();
         moonPanel.add(moonLabel);
         moonPanel.add(moonReadout);
-        moonPanel.setPreferredSize(new Dimension(190,50));
+        moonPanel.setPreferredSize(new Dimension(190,25));
+        
+        JPanel weatherPanel = new JPanel();
+        weatherLabel = new JLabel();
+        weatherPanel.add(weatherLabel);
+        weatherPanel.setPreferredSize(new Dimension(50,20));
          
         JPanel rainPanel = new JPanel();
         rainPanel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -196,6 +215,7 @@ public class WeatherGUI extends JFrame {
 
         eastLayoutPanel.add(windPanel);
         eastLayoutPanel.add(moonPanel);
+        eastLayoutPanel.add(weatherPanel);
         
         add(northLayoutPanel, BorderLayout.NORTH);
         add(eastLayoutPanel, BorderLayout.EAST);
@@ -269,7 +289,7 @@ public class WeatherGUI extends JFrame {
                 "Third Quarter", "Waning Crescent" };
 
         //Retrieves the images and places them into an ImageIcon array.
-        for (int i = 0; i < NUM_IMAGES; i++) {
+        for (int i = 0; i < NUM_MOON_IMAGES; i++) {
             String imageName = "image" + i + ".png";
             URL url = getClass().getResource(String.format("/Lunar_Phases/%s", imageName));
 
@@ -283,6 +303,34 @@ public class WeatherGUI extends JFrame {
         moonReadout.setText(phases[moon]);
         moonLabel.setIcon(moonImages[moon]);
     }
+    
+    /**
+     * Based on the weather data received from the weather controller, 
+     * the setWeatherIcon will assign a weather icon.
+     * Example: Rain is high and its 32 degrees outside. The weather Icon will be snowing. 
+     * @param weatherData -> an integer value that will tell us which weather icon to use.
+     */
+    public void setWeatherIcon(int weatherData) {
+    	
+    	
+    	 //Retrieves the weather images and places them into an ImageIcon array.
+        for (int i = 0; i < NUM_WEATHER_ICONS; i++) {
+            String imageName = "image" + i + ".png";
+            URL url = getClass().getResource(String.format("/Weather_Icons/%s", imageName));
+
+            ImageIcon icon = new ImageIcon(url);
+            Image image =icon.getImage();
+            Image newImg = image.getScaledInstance(50,50, Image.SCALE_SMOOTH);
+            ImageIcon resizedIcon = new ImageIcon(newImg);
+            weatherIcon[i] = resizedIcon;
+        }
+        weatherLabel.setIcon(weatherIcon[weatherData]);
+    }
+    
+    
+    
+    
+  
     
     /**
      * Set the current rainfall rate

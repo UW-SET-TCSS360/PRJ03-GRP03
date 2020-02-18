@@ -100,6 +100,7 @@ public class WeatherController implements Runnable {
 			Date date = new Date();
 			int sunrise = extractSunrise(packet);
 			int sunset = extractSunset(packet);
+			int wIcon = generateWeatherIcon(packet);
 
 			gui.setTemp(temp);
 			gui.setHumid(humid);
@@ -112,6 +113,7 @@ public class WeatherController implements Runnable {
 			gui.setSunrise(sunrise);
 			gui.setSunset(sunset);
 			gui.graphTick();
+			gui.setWeatherIcon(wIcon);
 		}
 	}
 
@@ -202,4 +204,49 @@ public class WeatherController implements Runnable {
 		ByteBuffer buf = ByteBuffer.wrap(packet);
 		return (int) (100*buf.get(SUNSET_OFFSET)) + (int) buf.get(SUNSET_OFFSET + 1);
 	}
+	
+	
+	/**
+	 * Extracts the temperature, wind speed, and rain.
+	 * @param packet contains the values from the weather station.
+	 * @return integer value that will be passed down to select a specific weather icon.
+	 */
+	private int generateWeatherIcon(byte[] packet) {
+		
+		int temperature = extractTemp(packet);
+		int windSpeed = extractWindSpd(packet);
+		int rain = extractRain(packet);
+		System.out.println(temperature + " temp " + windSpeed + " Wind speed " + rain + " Rain");
+		
+		// Control if statements that control which weather icon to choose.
+		if ((temperature <= 320) && (rain >= 7) & (windSpeed <= 30)) {
+			return 4; // 4 -> Snowing
+		} else if ((temperature > 320 && temperature <=399) & (rain > 7) & (windSpeed <= 30)) {
+			return 7; // 7 -> Rain/snow
+		} else if ((temperature >= 400) && (rain > 7 & rain <= 40) & (windSpeed <= 30)) {
+			return 5; // 5 -> Drizzle rain 
+		} else if ((temperature >= 400) && (rain > 40) & (windSpeed <= 30)) {
+			return 6; // 6 -> Raining
+		} else if ((temperature >= 100) & (rain == 0) & (windSpeed <= 30)) {
+			return 2; // 2 -> Sunny 
+		} else if ((temperature >= 100) & (rain > 1 & rain <= 2) & (windSpeed <= 30)) {
+			return 1; // 1 -> Cloudy
+		} else if ((temperature >= 400) & (rain >= 3 & rain < 7) & (windSpeed <= 30)) {
+			return 0; // 0 -> Partially cloudy/sunny 
+		} else if (windSpeed > 30) {
+			return 3;
+		}
+		
+		
+		return 0;
+	}
+	
+	
+	
+	
+	
+	
 }
+
+
+	
