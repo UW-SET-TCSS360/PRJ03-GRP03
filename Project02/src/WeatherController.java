@@ -216,7 +216,7 @@ public class WeatherController implements Runnable {
 		int temperature = extractTemp(packet);
 		int windSpeed = extractWindSpd(packet);
 		int rain = extractRain(packet);
-		System.out.println(temperature + " temp " + windSpeed + " Wind speed " + rain + " Rain");
+		//System.out.println(temperature + " temp " + windSpeed + " Wind speed " + rain + " Rain");
 		
 		// Control if statements that control which weather icon to choose.
 		if ((temperature <= 320) && (rain >= 7) & (windSpeed <= 30)) {
