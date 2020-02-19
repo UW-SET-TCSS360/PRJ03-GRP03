@@ -8,5 +8,10 @@
 /WeatherMain.class
 /WeatherStation.class
 /Weather_Icons/
+<<<<<<< HEAD
 /WindPanel.class
 /Storage.class
+=======
+/About.class
+/WeatherGUI$1.class
+>>>>>>> branch 'master' of https://github.com/ibokov/WeatherStation-G1.git

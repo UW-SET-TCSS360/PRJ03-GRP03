@@ -70,19 +70,17 @@ public class WeatherController implements Runnable {
 	 * An instantiation of the WeatherGUI.
 	 */
 	private WeatherGUI gui;
-	
-	private Storage storage;
 
 	/**
 	 * The constructor for weather controller.
 	 * @param station the instance of the weather station.
 	 * @param gui the instance of the weather gui.
 	 */
-	public WeatherController(WeatherStation station, WeatherGUI gui, Storage storage) {
-		this.station = station;
+	public WeatherController(public WeatherController(WeatherStation station, WeatherGUI gui) {
+        this.station = station;
 		this.gui = gui;
-		this.storage = storage;
 		random = new Random();
+		
 	}
 
 	/**
@@ -231,7 +229,7 @@ public class WeatherController implements Runnable {
 		int temperature = extractTemp(packet);
 		int windSpeed = extractWindSpd(packet);
 		int rain = extractRain(packet);
-		System.out.println(temperature + " temp " + windSpeed + " Wind speed " + rain + " Rain");
+		//System.out.println(temperature + " temp " + windSpeed + " Wind speed " + rain + " Rain");
 		
 		// Control if statements that control which weather icon to choose.
 		if ((temperature <= 320) && (rain >= 7) & (windSpeed <= 30)) {

@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.Date;
 
@@ -110,6 +111,11 @@ public class WeatherGUI extends JFrame {
      * Shows the weatherIcon.
      */
     private JLabel weatherLabel;
+    
+    /**
+     * The about window that provides information about the Weather Vantage Vue.
+     */
+    private About AboutInfo;
 
     /**
      * The method that will initialize the GUI to its default starting state.
@@ -180,6 +186,18 @@ public class WeatherGUI extends JFrame {
         sunsetPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         sunsetReadout = new JLabel("Sunset: --:-- p.m.");
         sunsetPanel.add(sunsetReadout);
+        
+        AboutInfo = new About();
+        JButton aboutButton = new JButton("About Info");
+        
+        aboutButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AboutInfo.setVisible(true);
+				
+			}
+		});
 
         JPanel northLayoutPanel = new JPanel();
         northLayoutPanel.setLayout(new FlowLayout());
@@ -203,6 +221,7 @@ public class WeatherGUI extends JFrame {
         southLayoutPanel.add(humidityButton);
         southLayoutPanel.add(rainfallButton);
         southLayoutPanel.add(windspeedButton);
+        southLayoutPanel.add(aboutButton);
 
         northLayoutPanel.add(tempPanel);
         northLayoutPanel.add(humidPanel);
