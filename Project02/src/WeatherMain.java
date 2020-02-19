@@ -25,7 +25,8 @@ public class WeatherMain {
         });
         
         WeatherStation station = new WeatherStation();
-        WeatherController controller = new WeatherController(station, gui);
+        Storage storage = new Storage();
+        WeatherController controller = new WeatherController(station, gui, storage);
         
         Thread thread = new Thread(controller);
         thread.start();
