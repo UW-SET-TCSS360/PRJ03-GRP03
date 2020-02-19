@@ -70,6 +70,8 @@ public class WeatherController implements Runnable {
 	 * An instantiation of the WeatherGUI.
 	 */
 	private WeatherGUI gui;
+	
+	 private Storage storage;
 
 	/**
 	 * The constructor for weather controller.
@@ -78,9 +80,11 @@ public class WeatherController implements Runnable {
 	 */
 	public WeatherController(WeatherStation station, WeatherGUI gui) {
         this.station = station;
+	public WeatherController(WeatherStation station, WeatherGUI gui, Storage storage) {
+		this.station = station;
 		this.gui = gui;
+		this.storage = storage;
 		random = new Random();
-		
 	}
 
 	/**
@@ -101,7 +105,7 @@ public class WeatherController implements Runnable {
 			Date date = new Date();
 			int sunrise = extractSunrise(packet);
 			int sunset = extractSunset(packet);
-			int wIcon = generateWeatherIcon(packet); 
+			int wIcon = generateWeatherIcon(packet);
 
 			gui.setTemp(temp);
 			gui.setHumid(humid);
@@ -115,7 +119,6 @@ public class WeatherController implements Runnable {
 			gui.setSunset(sunset);
 			gui.graphTick();
 			gui.setWeatherIcon(wIcon);
-			
 			
 			storage.addTemp(temp);
 			storage.addHum(humid);
