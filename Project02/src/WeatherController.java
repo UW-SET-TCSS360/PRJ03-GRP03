@@ -78,8 +78,6 @@ public class WeatherController implements Runnable {
 	 * @param station the instance of the weather station.
 	 * @param gui the instance of the weather gui.
 	 */
-	public WeatherController(WeatherStation station, WeatherGUI gui) {
-        this.station = station;
 	public WeatherController(WeatherStation station, WeatherGUI gui, Storage storage) {
 		this.station = station;
 		this.gui = gui;
