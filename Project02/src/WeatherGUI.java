@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,9 +14,12 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 
 // TEsting Hyelin
 
@@ -200,7 +202,7 @@ public class WeatherGUI extends JFrame {
 		});
 
         JPanel northLayoutPanel = new JPanel();
-        northLayoutPanel.setLayout(new FlowLayout());
+        northLayoutPanel.setLayout(new BorderLayout());
 
         JPanel eastLayoutPanel = new JPanel();
         eastLayoutPanel.setLayout(new BoxLayout(eastLayoutPanel, BoxLayout.Y_AXIS));
@@ -208,6 +210,11 @@ public class WeatherGUI extends JFrame {
         JPanel southLayoutPanel = new JPanel();
         southLayoutPanel.setLayout(new GridLayout(2, 4, 40, 20));
 
+        JPanel dataNorth = new JPanel();
+        dataNorth.setLayout(new FlowLayout());
+        
+        JPanel buttonNorth = new JPanel();
+        buttonNorth.setLayout(new FlowLayout());
         // Example Button addition into the South Panel Layout
         // ADD BUTTONS TO SOUTH PANEL.
         JButton tempButton = new JButton(new GraphButtonAction(GraphPanel.TEMP_SENSOR, "Graph Temperature"));
@@ -216,6 +223,83 @@ public class WeatherGUI extends JFrame {
         JButton rainfallButton = new JButton(new GraphButtonAction(GraphPanel.RAINFALL_SENSOR, "Graph Rainfall"));
         JButton windspeedButton = new JButton(new GraphButtonAction(GraphPanel.WIND_SENSOR, "Graph Wind Speed"));
 	    
+        
+        JFrame frame = new JFrame();
+        
+        
+        // Button for previous data
+        JButton previousDataButton = new JButton("Get Snapshot");
+        previousDataButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JDialog dis = new JDialog(frame, "Get Snapshot", true);
+				JButton hours = new JButton("Hours");
+				hours.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				JButton days = new JButton("Days");
+				JButton months = new JButton("Months");
+				JLabel previousLabel = new JLabel("Please select one.");
+				JPanel previousPanel = new JPanel();
+				JPanel buttonPanel = new JPanel();
+				previousPanel.setLayout(new BorderLayout());
+				buttonPanel.setLayout(new FlowLayout());
+				buttonPanel.add(hours);
+				buttonPanel.add(days);
+				buttonPanel.add(months);
+				
+				previousPanel.add(previousLabel, BorderLayout.NORTH);
+				previousPanel.add(buttonPanel, BorderLayout.SOUTH);
+				dis.add(previousPanel);
+				
+				dis.setSize(500, 100);
+				dis.setResizable(false);
+				dis.setLocationRelativeTo(frame);
+				dis.setVisible(true);
+			}
+		});
+        
+        // Button for alert
+        JButton alertButton = new JButton("Alert");
+        
+        // Button for about
+        JButton aboutButtonTop = new JButton("About");
+        aboutButtonTop.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JTabbedPane aboutTab = new JTabbedPane();
+				JTextArea about = new JTextArea();
+				JTextArea getSanpshot = new JTextArea();
+				JTextArea alert = new JTextArea();
+				about.setEditable(false);
+				getSanpshot.setEditable(false);
+				alert.setEditable(false);
+				about.append("Our weather stations help professionals and"
+						+ "\n" 
+						+"hobbyists measure, monitor, and manage weather data. ");
+				getSanpshot.append("about get snapshot");
+				alert.append("about alert");
+				aboutTab.addTab("About", about);
+				aboutTab.addTab("About Get Snapshot", getSanpshot);
+				aboutTab.addTab("About Alert", alert);
+				JDialog dis = new JDialog(frame, "About", true);
+				dis.add(aboutTab);
+				dis.setSize(350, 350);
+				dis.setResizable(false);
+				dis.setLocationRelativeTo(frame);
+				dis.setVisible(true);
+			}
+		});
+        
         southLayoutPanel.add(tempButton);
         southLayoutPanel.add(pressureButton);
         southLayoutPanel.add(humidityButton);
@@ -223,18 +307,24 @@ public class WeatherGUI extends JFrame {
         southLayoutPanel.add(windspeedButton);
         southLayoutPanel.add(aboutButton);
 
-        northLayoutPanel.add(tempPanel);
-        northLayoutPanel.add(humidPanel);
-        northLayoutPanel.add(pressurePanel);
-        northLayoutPanel.add(rainPanel);
-        northLayoutPanel.add(datePanel);
-        northLayoutPanel.add(timePanel);
-        northLayoutPanel.add(sunrisePanel);
-        northLayoutPanel.add(sunsetPanel);
+        buttonNorth.add(previousDataButton);
+        buttonNorth.add(alertButton);
+        buttonNorth.add(aboutButtonTop);
+        
+        dataNorth.add(tempPanel);
+        dataNorth.add(humidPanel);
+        dataNorth.add(pressurePanel);
+        dataNorth.add(rainPanel);
+        dataNorth.add(datePanel);
+        dataNorth.add(timePanel);
+        dataNorth.add(sunrisePanel);
+        dataNorth.add(sunsetPanel);
+        
+        northLayoutPanel.add(buttonNorth, BorderLayout.WEST);
+        northLayoutPanel.add(dataNorth, BorderLayout.SOUTH);
 
         eastLayoutPanel.add(windPanel);
         eastLayoutPanel.add(moonPanel);
-        eastLayoutPanel.add(weatherPanel);
         
         add(northLayoutPanel, BorderLayout.NORTH);
         add(eastLayoutPanel, BorderLayout.EAST);
