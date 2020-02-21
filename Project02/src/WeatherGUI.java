@@ -374,7 +374,8 @@ public class WeatherGUI extends JFrame {
 
         eastLayoutPanel.add(windPanel);
         eastLayoutPanel.add(moonPanel);
-
+        eastLayoutPanel.add(weatherPanel);
+        
         add(northLayoutPanel, BorderLayout.NORTH);
         add(eastLayoutPanel, BorderLayout.EAST);
         add(southLayoutPanel, BorderLayout.SOUTH);
