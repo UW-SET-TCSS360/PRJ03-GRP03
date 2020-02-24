@@ -17,6 +17,7 @@ public class WeatherMain {
      */
     public static void main(final String[] theArgs) {        
         // start the GUI in a separate thread
+        System.out.println("nick");
         Alerts alert = new Alerts();
     	WeatherGUI gui = new WeatherGUI(alert);
 
