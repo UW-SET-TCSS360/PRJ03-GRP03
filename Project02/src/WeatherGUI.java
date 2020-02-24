@@ -236,6 +236,31 @@ public class WeatherGUI extends JFrame {
         JButton humidityButton = new JButton(new GraphButtonAction(GraphPanel.HUMIDITY_SENSOR, "Graph Humidity"));
         JButton rainfallButton = new JButton(new GraphButtonAction(GraphPanel.RAINFALL_SENSOR, "Graph Rainfall"));
         JButton windspeedButton = new JButton(new GraphButtonAction(GraphPanel.WIND_SENSOR, "Graph Wind Speed"));
+	JButton close = new JButton("System shut down");
+        close.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Storage.tempWriter.close();
+					Storage.humWriter.close();
+					Storage.presWriter.close();
+					Storage.speedWriter.close();
+					Storage.dirWriter.close();
+					Storage.phaseWriter.close();
+					Storage.rainWriter.close();
+					Storage.sunRiseWriter.close();
+					Storage.sunSetWriter.close();
+					Storage.wIconWriter.close();
+					System.exit(0);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 	    
         
         JFrame frame = new JFrame();
@@ -325,7 +350,8 @@ public class WeatherGUI extends JFrame {
         buttonNorth.add(previousDataButton);
 //        buttonNorth.add(alertButton);
         buttonNorth.add(aboutButtonTop);
-        
+        buttonNorth.add(close);
+	    
         dataNorth.add(tempPanel);
         dataNorth.add(humidPanel);
         dataNorth.add(pressurePanel);
