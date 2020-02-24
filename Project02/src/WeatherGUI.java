@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 
@@ -385,6 +386,7 @@ public class WeatherGUI extends JFrame {
         buttonNorth.add(previousDataButton);
         buttonNorth.add(alertButton);
         buttonNorth.add(aboutButtonTop);
+        buttonNorth.add(close);
 
         dataNorth.add(tempPanel);
         dataNorth.add(humidPanel);
