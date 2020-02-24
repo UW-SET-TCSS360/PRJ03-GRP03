@@ -66,22 +66,146 @@ public class Storage {
 	 * file to store temperature 
 	 */
 	File tempFile; 
+	
+	/**
+	 * file to store humidity 
+	 */
+	File humFile; 
+	
+	/**
+	 * file to store pressure 
+	 */
+	File presFile; 
+	
+	/**
+	 * file to store wind speed 
+	 */
+	File speedFile; 
+	
+	/**
+	 * file to store direction speed 
+	 */
+	File dirFile; 
+	
+	/**
+	 * file to store moon phase 
+	 */
+	File phaseFile; 
+	
+	/**
+	 * file to store rain 
+	 */
+	File rainFile; 
+	
+	/**
+	 * file to store sun rise 
+	 */
+	File sunRiseFile; 
+	
+	/**
+	 * file to store sun set 
+	 */
+	File sunSetFile; 
+	
+	/**
+	 * file to store weather icon 
+	 */
+	File wIconFile; 
+	
 	/**
 	 * File to write to temperature 
 	 */
-	BufferedWriter writer;
+	static BufferedWriter tempWriter;
+	
 	/**
-	 * checks if user close program
+	 * File to write to humidity 
 	 */
-	public static boolean check = false;
+	static BufferedWriter humWriter;
+	
+	/**
+	 * File to write to pressure 
+	 */
+	static BufferedWriter presWriter;
+	
+	/**
+	 * File to write to wind speed 
+	 */
+	static BufferedWriter speedWriter;
+	
+	/**
+	 * File to write to wind direction 
+	 */
+	static BufferedWriter dirWriter;
+	
+	/**
+	 * File to write to moon phase 
+	 */
+	static BufferedWriter phaseWriter;
+	
+	/**
+	 * File to write to rain 
+	 */
+	static BufferedWriter rainWriter;
+	
+	/**
+	 * File to write to sun rise 
+	 */
+	static BufferedWriter sunRiseWriter;
+	
+	/**
+	 * File to write to sun set 
+	 */
+	static BufferedWriter sunSetWriter;
+	
+	/**
+	 * File to write to weather icon 
+	 */
+	static BufferedWriter wIconWriter;
+	
  	
 	public Storage() {
-		tempFile = new File("tempFile.txt");
-		
+		/**
+		 * creates new files if they don't already exist
+		 */
 		try {
-			
-		    writer = new BufferedWriter(new FileWriter("tempFile.txt"));
-		   
+			tempFile = new File("tempFile.txt");
+			tempFile.createNewFile();
+			humFile = new File("humFile.txt");
+			humFile.createNewFile();
+			presFile = new File("presFile.txt");
+			presFile.createNewFile();
+			speedFile = new File("speedFile.txt");
+			speedFile.createNewFile();
+			dirFile = new File("dirFile.txt");
+			dirFile.createNewFile();
+			phaseFile = new File("phaseFile.txt");
+			phaseFile.createNewFile();
+			rainFile = new File("rainFile.txt");
+			rainFile.createNewFile();
+			sunRiseFile = new File("sunRiseFile.txt");
+			sunRiseFile.createNewFile();
+			sunSetFile = new File("sunSetFile.txt");
+			sunSetFile.createNewFile();
+			wIconFile = new File("wIconFile.txt");
+			wIconFile.createNewFile();
+		} catch (Exception e) { 
+            System.err.println(e); 
+        } 
+		
+		/**
+		 * writes to a file output
+		 */
+		try {
+		    tempWriter = new BufferedWriter(new FileWriter("tempFile.txt", true));
+		    humWriter = new BufferedWriter(new FileWriter("humFile.txt", true));
+		    presWriter = new BufferedWriter(new FileWriter("presFile.txt", true));
+		    speedWriter = new BufferedWriter(new FileWriter("speedFile.txt", true));
+		    dirWriter = new BufferedWriter(new FileWriter("dirFile.txt", true));
+		    phaseWriter = new BufferedWriter(new FileWriter("phaseFile.txt", true));
+		    rainWriter = new BufferedWriter(new FileWriter("rainFile.txt", true));
+		    sunSetWriter = new BufferedWriter(new FileWriter("sunRiseFile.txt", true));
+		    sunRiseWriter = new BufferedWriter(new FileWriter("sunSetFile.txt", true));
+		    wIconWriter = new BufferedWriter(new FileWriter("wIconFile.txt", true));
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -140,9 +264,9 @@ public class Storage {
 	public void addTemp(int temp) {
 		tempList.add(temp);
 		
-		try {
-			 String str = "Hello";	    
-			 writer.write(str);
+		try {    
+			tempWriter.write("" + temp);
+			tempWriter.write("\n");
 			    
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -156,6 +280,13 @@ public class Storage {
 	 */
 	public void addHum(int hum) {
 		humList.add(hum);
+		try {    
+			humWriter.write("" + hum);
+			humWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("Humidity", humList);
 	}
 	
@@ -165,6 +296,13 @@ public class Storage {
 	 */
 	public void addPres(int pressure) {
 		presList.add(pressure);
+		try {    
+			presWriter.write("" + pressure);
+			presWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("Pressure", presList);
 	}
 	
@@ -174,6 +312,13 @@ public class Storage {
 	 */
 	public void addWindSpeed(int speed) {
 		speedList.add(speed);
+		try {    
+			speedWriter.write("" + speed);
+			speedWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("WindSpeed", speedList);
 	}
 	
@@ -183,6 +328,13 @@ public class Storage {
 	 */
 	public void addWindDir(int dir) {
 		dirList.add(dir);
+		try {    
+			dirWriter.write("" + dir);
+			dirWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("WindDir", dirList);
 	}
 	
@@ -192,6 +344,13 @@ public class Storage {
 	 */
 	public void addMoonPhase(int phase) {
 		phaseList.add(phase);
+		try {    
+			phaseWriter.write("" + phase);
+			phaseWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("MoonPhase", phaseList);
 	}
 	
@@ -201,6 +360,13 @@ public class Storage {
 	 */
 	public void addRain(int rain) {
 		rainList.add(rain);
+		try {    
+			rainWriter.write("" + rain);
+			rainWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("Rain", rainList);
 	}
 	
@@ -210,6 +376,13 @@ public class Storage {
 	 */
 	public void addSunRise(int sunRise) {
 		riseList.add(sunRise);
+		try {    
+			sunRiseWriter.write("" + sunRise);
+			sunRiseWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("SunRise", riseList);
 	}
 	
@@ -219,6 +392,13 @@ public class Storage {
 	 */
 	public void addSunSet(int sunSet) {
 		setList.add(sunSet);
+		try {    
+			sunSetWriter.write("" + sunSet);
+			sunSetWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("SunSet", setList);
 	}
 	
@@ -226,8 +406,15 @@ public class Storage {
 	 * Adds the weather Icon data and stores it into a map
 	 * @param WIcon
 	 */
-	public void addWIcon(int WIcon) {
-		wIconList.add(WIcon);
+	public void addWIcon(int wIcon) {
+		wIconList.add(wIcon);
+		try {    
+			wIconWriter.write("" + wIcon);
+			wIconWriter.write("\n");
+			    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		infoMap.put("WeatherIcon", wIconList);
 	}
 	
