@@ -335,7 +335,8 @@ public class WeatherGUI extends JFrame {
         buttonNorth.add(previousDataButton);
         buttonNorth.add(alertButton);
         buttonNorth.add(aboutButtonTop);
-        
+        buttonNorth.add(close);
+	    
         dataNorth.add(tempPanel);
         dataNorth.add(humidPanel);
         dataNorth.add(pressurePanel);
