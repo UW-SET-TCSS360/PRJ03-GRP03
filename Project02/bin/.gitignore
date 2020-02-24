@@ -1,12 +1,11 @@
 /.DS_Store
-/Lunar_Phases/
-/Weather_Icons/
 /About.class
 /Alerts$1.class
 /Alerts$2.class
 /Alerts$3.class
 /Alerts.class
 /GraphPanel.class
+/Lunar_Phases/
 /Storage.class
 /WeatherController.class
 /WeatherGUI$1.class
@@ -19,4 +18,5 @@
 /WeatherMain$1.class
 /WeatherMain.class
 /WeatherStation.class
+/Weather_Icons/
 /WindPanel.class
