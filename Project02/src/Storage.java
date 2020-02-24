@@ -41,7 +41,7 @@ public class Storage {
 	public void addTemp(int temp) {
 		tempList.add(temp);
 		infoMap.put("Temp", tempList);
-		System.out.println(infoMap);
+		//System.out.println(infoMap);
 	}
 	
 	public void addHum(int hum) {

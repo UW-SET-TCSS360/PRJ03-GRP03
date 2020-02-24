@@ -209,7 +209,8 @@ public class WeatherStation{
 			buf.put(SUNRISE_OFFSET + 1, (byte)(getSunrise()%100));
 			buf.put(SUNSET_OFFSET, (byte)(getSunset()/100));
 			buf.put(SUNSET_OFFSET + 1, (byte)(getSunset()%100));
-			
+
+
 			return packet;
 		} catch (InterruptedException e) {
 			return null;

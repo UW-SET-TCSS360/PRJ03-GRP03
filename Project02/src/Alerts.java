@@ -13,12 +13,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import sun.jvm.hotspot.debugger.Page;
-import sun.util.BuddhistCalendar;
+
 
 /**
  * An alerts class that provides a GUI window for the user to set specific parameters on when they
@@ -42,7 +42,32 @@ public class Alerts extends JFrame {
 	/**
 	 * A storage of all the set alarms using a map, that contains all the thresholds.
 	 */
-	private Map<String, Integer> alertMap;
+	private Map<String, Double> alertMap;
+	
+	/**
+	 * A integer value of temperature passed from weather controller.
+	 */
+	private Double myTemperature;
+	
+	/**
+	 * A integer value of wind speed passed from weather controller.
+	 */
+	private Double myWindSpeed;
+	
+	/**
+	 * A integer value of rain fall  passed from weather controller.
+	 */
+	private Double myRainFall;
+
+	/**
+	 * A integer value of air pressure passed from weather controller.
+	 */
+	private Double myAirPressure;
+
+	/**
+	 * A boolean flag that checks if an alert has been set or not.
+	 */
+	private boolean myFlag;
 	
 	public Alerts() {
 		alarmButton = new JButton("Alerts");
@@ -50,6 +75,7 @@ public class Alerts extends JFrame {
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setSize(new Dimension(300,400));
 		this.setTitle("Alert and Alarms");
+		myFlag = false;
 		
 		this.addWindowListener(new WindowAdapter() {
 			
@@ -75,13 +101,14 @@ public class Alerts extends JFrame {
 		});
 		
 		startUpInterface();
+
 			
-		
+
 		
 	}
 	
 	/**
-	 * A method for initiallizing all the GUI components for the Alarms window.
+	 * A method for initializing all the GUI components for the Alarms window.
 	 */
 	private void startUpInterface() {
 		JButton addAlert = new JButton("Add Alert");
@@ -131,22 +158,116 @@ public class Alerts extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				try {
-					Integer temp = Integer.parseInt(textValue.getText());
+					Double tempValue = Double.parseDouble(textValue.getText());
 					
 					// check if a weather characateristic is selected and a value is entered.
 					if (myTemp.isSelected() && !textValue.getText().isEmpty()) {
-						alertMap.put("Temp", temp);
-						
-					}
+						alertMap.put("Temp", tempValue);
+						myFlag = true;
+					} else if (myWind.isSelected() && !textValue.getText().isEmpty()) {
+						alertMap.put("Wind Speed",  tempValue);
+
+						myFlag = true;
+						System.out.println(alertMap.get("Wind Speed"));
+						System.out.println("MAP SIZE: " + alertMap.size());
+					} else if (myRain.isSelected() && !textValue.getText().isEmpty()) {
+						alertMap.put("Rain",  tempValue);
+						myFlag = true;
+					} else if (myPressure.isSelected() && !textValue.getText().isEmpty()) {
+						alertMap.put("Pressure",  tempValue);
+						myFlag = true;
+					} 
+					
+				}
+				catch (NumberFormatException excp1) {
+					JOptionPane.showMessageDialog(new JFrame(),  "Please enter a valid value. (an integer value).");;
 				}
 			}
 		});
 		
-		
-		
+			
 	}
 	
+	/**
+	 * A class that checks the values coming in from the weather Station byte packet
+	 * and compares them to the set alerts in the HashMap. If no alerts match or no alerts were 
+	 * set then no alerts window will show up. If there is a match then a new window will open up 
+	 * with a warning.
+	 * 
+	 * @param theValues the HashMap of the weather alerts. 
+	 */
+	public void checkAlert() {
+		// check temperature against stored temp alert in map.
+		System.out.println("ANOTHER" + getAlertMap().size());
+		System.out.println("HELLO");
+		System.out.println("ALERTM MAP SIZE " + alertMap.size());
+			if (alertMap.containsKey("Temp") && (myTemperature > alertMap.get("Temp"))) {
+				JOptionPane.showMessageDialog(new JFrame(),
+						"WARNING \n The Current temperature (fahrenheit) is greater than " + alertMap.get("Temp"));
+			} else if (alertMap.containsKey("Pressure") && (myAirPressure > alertMap.get("Pressure"))) {
+				JOptionPane.showMessageDialog(new JFrame(),
+						"WARNING \n The Current air pressure (bar) is greater than " + alertMap.get("Pressure"));
+			} else if (alertMap.containsKey("Rain") && (myRainFall > alertMap.get("Rain"))) {
+				JOptionPane.showMessageDialog(new JFrame(),
+						"WARNING \n The Current rainfall (in/h) is greater than " + alertMap.get("Rain"));
+			} else if (alertMap.containsKey("Wind Speed") && (myWindSpeed > alertMap.get("Wind Speed"))) {
+				System.out.println("HELLO");
+				JOptionPane.showMessageDialog(new JFrame(),
+						"WARNING \n The Current wind speed (mph) is greater than " + alertMap.get("Wind Speed"));
+			}
+
+
+
+	}
 	
+	/**
+	 * Set method to pass through the temperature from WeatherController.
+	 * @param theTemperature integer value of temperature.
+	 */
+	public void setTemp(int theTemperature) {
+
+		myTemperature = theTemperature / 10.0;
+
+	}
 	
+	/**
+	 * Set method to pass through the wind speed from WeatherController.
+	 * @param theWind integer value of wind speed (mph).
+	 */
+	public void setWindSpeed(int theWind) {
+		myWindSpeed = theWind / 1.0;
+		System.out.println(myWindSpeed);
+	}
 	
+	/**
+	 * Set method to pass through the rain fall from WeatherController.
+	 * @param theRain integer value of rain fall 
+	 */
+	public void setRain(int theRain) {
+		myRainFall = theRain / 10.0;
+	}
+	
+	/**
+	 * Set method to pass through the air pressure from WeatherController.
+	 * @param thePressure integer value of air pressure.
+	 */
+	public void setPressure(int thePressure) {
+		myAirPressure = thePressure / 10.0;
+	}
+
+	/**
+	 * Returns the button for alarm that will launch the whole alarm window.
+	 * @return the alarm button.
+	 */
+	public JButton getAlarmButton() {
+		return alarmButton;
+	}
+
+	/**
+	 * Returns the hashmap for different alerts.
+	 * @return hashmap of alerts.
+	 */
+	public Map<String, Double> getAlertMap() {
+		return alertMap;
+	}
 }
