@@ -148,17 +148,18 @@ public class WeatherGUI extends JFrame {
         setLocationRelativeTo(null);
         
         JPanel tempPanel = new JPanel();
-        tempPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        tempPanel.setBorder(BorderFactory.createLineBorder(Color.white));
         tempReadout = new JLabel("Temp: -- °F");
         tempPanel.add(tempReadout);
         
         JPanel humidPanel = new JPanel();
-        humidPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        humidPanel.setBorder(BorderFactory.createLineBorder(Color.white));
         humidReadout = new JLabel("Humid: -- %");
+       
         humidPanel.add(humidReadout);
         
         JPanel pressurePanel = new JPanel();
-        pressurePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        pressurePanel.setBorder(BorderFactory.createLineBorder(Color.white));
         pressureReadout = new JLabel("Pressure: -- in");
         pressurePanel.add(pressureReadout);
 
@@ -180,27 +181,27 @@ public class WeatherGUI extends JFrame {
         weatherPanel.setPreferredSize(new Dimension(50,20));
          
         JPanel rainPanel = new JPanel();
-        rainPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        rainPanel.setBorder(BorderFactory.createLineBorder(Color.white));
         rainReadout = new JLabel("Rain: -- in./hr.");
         rainPanel.add(rainReadout);
         
         JPanel datePanel = new JPanel();
-        datePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        datePanel.setBorder(BorderFactory.createLineBorder(Color.white));
         dateReadout = new JLabel("Date: ---, --- --, ----");
         datePanel.add(dateReadout);
         
         JPanel timePanel = new JPanel();
-        timePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        timePanel.setBorder(BorderFactory.createLineBorder(Color.white));
         timeReadout = new JLabel("Time: --:--:-- a.m.");
         timePanel.add(timeReadout);  
         
         JPanel sunrisePanel = new JPanel();
-        sunrisePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        sunrisePanel.setBorder(BorderFactory.createLineBorder(Color.white));
         sunriseReadout = new JLabel("Sunrise: --:-- a.m.");
         sunrisePanel.add(sunriseReadout); 
         
         JPanel sunsetPanel = new JPanel();
-        sunsetPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        sunsetPanel.setBorder(BorderFactory.createLineBorder(Color.white));
         sunsetReadout = new JLabel("Sunset: --:-- p.m.");
         sunsetPanel.add(sunsetReadout);
         
