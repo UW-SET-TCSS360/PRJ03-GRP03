@@ -71,17 +71,26 @@ public class WeatherController implements Runnable {
 	 */
 	private WeatherGUI gui;
 	
-	 private Storage storage;
+	/**
+	 * An instantiation of the Storage.
+	 */
+	private Storage storage;
+	 
+	/**
+	 * An instantiation of the Alerts class.
+	 */
+	private Alerts alert;
 
 	/**
 	 * The constructor for weather controller.
 	 * @param station the instance of the weather station.
 	 * @param gui the instance of the weather gui.
 	 */
-	public WeatherController(WeatherStation station, WeatherGUI gui, Storage storage) {
+	public WeatherController(WeatherStation station, WeatherGUI gui, Storage storage, Alerts alert) {
 		this.station = station;
 		this.gui = gui;
 		this.storage = storage;
+		this.alert = alert;
 		random = new Random();
 	}
 
@@ -128,6 +137,14 @@ public class WeatherController implements Runnable {
 			storage.addSunRise(sunrise);
 			storage.addSunSet(sunset);
 			storage.addWIcon(wIcon);
+			
+			alert.setTemp(temp);
+			alert.setPressure(pressure);
+			alert.setWindSpeed(windspd);
+			alert.setRain(rain);
+
+			alert.checkAlert();
+
 		}
 	}
 

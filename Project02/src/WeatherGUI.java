@@ -123,6 +123,20 @@ public class WeatherGUI extends JFrame {
     private About AboutInfo;
 
     /**
+     * Instantiates the alert window in the GUI.
+     */
+    private Alerts alertAlarm;
+
+    /**
+     * Constructor for weather gui.
+     * @param theAlert
+     */
+    public WeatherGUI(Alerts theAlert) {
+        alertAlarm = theAlert;
+        start();
+    }
+
+    /**
      * The method that will initialize the GUI to its default starting state.
      */
     public void start() {
@@ -344,8 +358,9 @@ public class WeatherGUI extends JFrame {
         });
 
         // Button for alert
-        JButton alertButton = new JButton("Alert");
 
+        //JButton alertButton = alertAlarm.getAlarmButton();
+        
         // Button for about
         JButton aboutButtonTop = new JButton("About");
         aboutButtonTop.addActionListener(new ActionListener() {
@@ -384,10 +399,10 @@ public class WeatherGUI extends JFrame {
         southLayoutPanel.add(aboutButton);
 
         buttonNorth.add(previousDataButton);
-        buttonNorth.add(alertButton);
+//        buttonNorth.add(alertButton);
         buttonNorth.add(aboutButtonTop);
         buttonNorth.add(close);
-
+	    
         dataNorth.add(tempPanel);
         dataNorth.add(humidPanel);
         dataNorth.add(pressurePanel);
@@ -398,6 +413,7 @@ public class WeatherGUI extends JFrame {
         dataNorth.add(sunsetPanel);
 
         northLayoutPanel.add(buttonNorth, BorderLayout.WEST);
+        northLayoutPanel.add(alertAlarm.getAlarmButton(), BorderLayout.CENTER);
         northLayoutPanel.add(dataNorth, BorderLayout.SOUTH);
 
         eastLayoutPanel.add(windPanel);
