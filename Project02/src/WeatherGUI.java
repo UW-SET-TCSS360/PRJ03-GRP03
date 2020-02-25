@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -147,8 +148,10 @@ public class WeatherGUI extends JFrame {
 
         // Sets the initial size and position of the application window
         setSize(1100, 530);
+        
         setLocationRelativeTo(null);
 
+        
         JPanel tempPanel = new JPanel();
         tempPanel.setBorder(BorderFactory.createLineBorder(Color.white));
         tempReadout = new JLabel("Temp: -- °F");
@@ -207,6 +210,8 @@ public class WeatherGUI extends JFrame {
         sunsetReadout = new JLabel("Sunset: --:-- p.m.");
         sunsetPanel.add(sunsetReadout);
 
+        //  JButton alertButton = alertAlarm.getAlarmButton();
+
         AboutInfo = new About();
         JButton aboutButton = new JButton("About Info");
 
@@ -225,9 +230,13 @@ public class WeatherGUI extends JFrame {
         JPanel eastLayoutPanel = new JPanel();
         eastLayoutPanel.setLayout(new BoxLayout(eastLayoutPanel, BoxLayout.Y_AXIS));
 
-        JPanel southLayoutPanel = new JPanel();
-        southLayoutPanel.setLayout(new GridLayout(2, 4, 40, 20));
+        JPanel westLayoutPanel = new JPanel();
 
+        
+        JPanel westLayoutSubPanel = new JPanel();
+        westLayoutSubPanel.setLayout(new GridLayout(0, 1, 70, 40));
+        westLayoutSubPanel.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
+        
         JPanel dataNorth = new JPanel();
         dataNorth.setLayout(new FlowLayout());
 
@@ -240,7 +249,7 @@ public class WeatherGUI extends JFrame {
         JButton humidityButton = new JButton(new GraphButtonAction(GraphPanel.HUMIDITY_SENSOR, "Graph Humidity"));
         JButton rainfallButton = new JButton(new GraphButtonAction(GraphPanel.RAINFALL_SENSOR, "Graph Rainfall"));
         JButton windspeedButton = new JButton(new GraphButtonAction(GraphPanel.WIND_SENSOR, "Graph Wind Speed"));
-	JButton close = new JButton("System shut down");
+        JButton close = new JButton("System shut down");
         close.addActionListener(new ActionListener() {
 			
 			@Override
@@ -360,8 +369,7 @@ public class WeatherGUI extends JFrame {
 
         // Button for alert
 
-        //JButton alertButton = alertAlarm.getAlarmButton();
-        
+       
         // Button for about
         JButton aboutButtonTop = new JButton("About");
         aboutButtonTop.addActionListener(new ActionListener() {
@@ -391,18 +399,29 @@ public class WeatherGUI extends JFrame {
                 dis.setVisible(true);
             }
         });
+        
+        
+        
+        
 
-        southLayoutPanel.add(tempButton);
-        southLayoutPanel.add(pressureButton);
-        southLayoutPanel.add(humidityButton);
-        southLayoutPanel.add(rainfallButton);
-        southLayoutPanel.add(windspeedButton);
-        southLayoutPanel.add(aboutButton);
+        westLayoutSubPanel.add(tempButton);
+        westLayoutSubPanel.add(pressureButton);
+        westLayoutSubPanel.add(humidityButton);
+        westLayoutSubPanel.add(rainfallButton);
+        westLayoutSubPanel.add(windspeedButton);
+        westLayoutSubPanel.add(aboutButton);
 
-        buttonNorth.add(previousDataButton);
-//        buttonNorth.add(alertButton);
+
+        westLayoutPanel.add(westLayoutSubPanel);
+
         buttonNorth.add(aboutButtonTop);
+        buttonNorth.add(previousDataButton);
+        //buttonNorth.add(alertButton);
         buttonNorth.add(close);
+        buttonNorth.add(alertAlarm.getAlarmButton());
+        
+        
+       
 	    
         dataNorth.add(tempPanel);
         dataNorth.add(humidPanel);
@@ -414,7 +433,8 @@ public class WeatherGUI extends JFrame {
         dataNorth.add(sunsetPanel);
 
         northLayoutPanel.add(buttonNorth, BorderLayout.WEST);
-        northLayoutPanel.add(alertAlarm.getAlarmButton(), BorderLayout.CENTER);
+        // northLayoutPanel.add(alertAlarm.getAlarmButton(), BorderLayout.CENTER);
+        //northLayoutPanel.add(close, BorderLayout.EAST);
         northLayoutPanel.add(dataNorth, BorderLayout.SOUTH);
 
         eastLayoutPanel.add(windPanel);
@@ -423,12 +443,17 @@ public class WeatherGUI extends JFrame {
         
         add(northLayoutPanel, BorderLayout.NORTH);
         add(eastLayoutPanel, BorderLayout.EAST);
-        add(southLayoutPanel, BorderLayout.SOUTH);
+        add(westLayoutPanel, BorderLayout.WEST);
         add(graphPanel, BorderLayout.CENTER);
 
+       
+        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+        setResizable(false);
+       
     }
+    
 
     /**
      * Sets the temperature
