@@ -98,7 +98,7 @@ public class WindPanel extends JPanel {
 		g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
                  RenderingHints.VALUE_STROKE_PURE);
 		
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.white);
 		g2d.setStroke(myStroke);
 		
 		// only use 90% of the bounding rectangle in each dimension

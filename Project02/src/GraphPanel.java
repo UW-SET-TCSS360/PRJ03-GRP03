@@ -223,7 +223,7 @@ public class GraphPanel extends JPanel {
 		g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
                  RenderingHints.VALUE_STROKE_PURE);
 		
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(Color.white);
 		g2d.setStroke(myStroke);
 		
 		// draw the background of the graph
@@ -261,11 +261,19 @@ public class GraphPanel extends JPanel {
 			Integer val = prevVals.get((index+i)%NUM_DIVS);
 			if (val != null) {
 				double yOffset = ((val-min)/(double)(max-min)) * (getHeight() - divH);
-				g2d.draw(new Rectangle.Double(divW + i*divW,
+				g2d.setColor(Color.white);
+				g2d.fill(new Rectangle.Double(divW + i*divW,
 						getHeight()-divH-yOffset,
 						divW,
 						yOffset)
 					);
+				g2d.setColor(Color.black);
+				g2d.setStroke(new BasicStroke(3));
+				g2d.draw(new Rectangle.Double(divW + i*divW,
+                        getHeight()-divH-yOffset,
+                        divW,
+                        yOffset)
+                    );
 			}
 		}
 		
