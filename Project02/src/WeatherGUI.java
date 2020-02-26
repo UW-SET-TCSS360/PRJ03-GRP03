@@ -133,11 +133,15 @@ public class WeatherGUI extends JFrame {
      * @param theAlert
      */
     public WeatherGUI(Alerts theAlert) {
-        alertAlarm = theAlert;
+        //alertAlarm = theAlert;
         start();
     }
 
-    /**
+    public WeatherGUI() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * The method that will initialize the GUI to its default starting state.
      */
     public void start() {
@@ -151,10 +155,10 @@ public class WeatherGUI extends JFrame {
         
         setLocationRelativeTo(null);
 
-        
+        JFrame frame = new JFrame();
         JPanel tempPanel = new JPanel();
         tempPanel.setBorder(BorderFactory.createLineBorder(Color.white));
-        tempReadout = new JLabel("Temp: -- °F");
+        tempReadout = new JLabel("Temp: -- Â°F");
         tempPanel.add(tempReadout);
 
         JPanel humidPanel = new JPanel();
@@ -220,6 +224,7 @@ public class WeatherGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AboutInfo.setVisible(true);
+                
 
             }
         });
@@ -276,7 +281,7 @@ public class WeatherGUI extends JFrame {
 		});
 	    
         
-        JFrame frame = new JFrame();
+        
 
         JLabel previousLabel = new JLabel("Please select one.");
         JPanel previousPanel = new JPanel();
@@ -401,9 +406,17 @@ public class WeatherGUI extends JFrame {
         });
         
         
+        alertAlarm = new Alerts();
+//        JButton alert = new JButton("Alert");
+//        aboutButtonTop.addActionListener(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // TODO Auto-generated method stub
+//                alertAlarm.getAlarmButton();
+//            }
+//        });
         
-        
-
         westLayoutSubPanel.add(tempButton);
         westLayoutSubPanel.add(pressureButton);
         westLayoutSubPanel.add(humidityButton);
@@ -417,8 +430,9 @@ public class WeatherGUI extends JFrame {
         buttonNorth.add(aboutButtonTop);
         buttonNorth.add(previousDataButton);
         //buttonNorth.add(alertButton);
-        buttonNorth.add(close);
         buttonNorth.add(alertAlarm.getAlarmButton());
+        buttonNorth.add(close);
+//        buttonNorth.add(alertAlarm.getAlarmButton());
         
         
        
@@ -433,7 +447,7 @@ public class WeatherGUI extends JFrame {
         dataNorth.add(sunsetPanel);
 
         northLayoutPanel.add(buttonNorth, BorderLayout.WEST);
-        // northLayoutPanel.add(alertAlarm.getAlarmButton(), BorderLayout.CENTER);
+//         northLayoutPanel.add(alertAlarm.getAlarmButton(), BorderLayout.CENTER);
         //northLayoutPanel.add(close, BorderLayout.EAST);
         northLayoutPanel.add(dataNorth, BorderLayout.SOUTH);
 
@@ -463,7 +477,7 @@ public class WeatherGUI extends JFrame {
     public void setTemp(int temp) {
         String raw = Integer.toString(temp);
         tempReadout
-                .setText("Temp: " + raw.substring(0, raw.length() - 1) + "." + raw.substring(raw.length() - 1) + " °F");
+                .setText("Temp: " + raw.substring(0, raw.length() - 1) + "." + raw.substring(raw.length() - 1) + " Â°F");
         if (graphPanel != null) {
             graphPanel.updateSensorValue(GraphPanel.TEMP_SENSOR, temp);
         }

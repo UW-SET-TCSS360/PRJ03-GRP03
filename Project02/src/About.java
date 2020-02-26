@@ -29,7 +29,8 @@ public class About extends JFrame {
 		tabs.add(windInfo(), "Wind Panel Info");
 		tabs.add(weatherIconInfo(), "Weather Icon Info");
 		this.pack();
-		
+		this.setResizable(false);
+		this.setLocationRelativeTo(this);
 	}
 	
 	/**

@@ -10,6 +10,7 @@ public class WeatherMain {
      * The constructor for the PowerPaintMain class, set private so it can't be instantiated.
      */
     private WeatherMain() {
+        
     }
     
     /**
@@ -19,10 +20,10 @@ public class WeatherMain {
      */
     public static void main(final String[] theArgs) {        
         // start the GUI in a separate thread
-       
+       System.out.println(UIManager.getSystemLookAndFeelClassName());
         try {
             //here you can put the selected theme class name in JTattoo
-            UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+            UIManager.setLookAndFeel( "com.jtattoo.plaf.noire.NoireLookAndFeel");
 
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(WeatherMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -73,10 +74,8 @@ public class Alerts extends JFrame {
 		alarmButton = new JButton("Alerts");
 		alertMap = new HashMap<>();
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setSize(new Dimension(450,500));
+		this.setSize(new Dimension(300,400));
 		this.setTitle("Alert and Alarms");
-		this.setResizable(false);
-		
 		myFlag = false;
 		
 		this.addWindowListener(new WindowAdapter() {
@@ -115,7 +114,6 @@ public class Alerts extends JFrame {
 	private void startUpInterface() {
 		JButton addAlert = new JButton("Add Alert");
 		JTextField textValue = new JTextField();
-
 		ButtonGroup buttonGroup = new ButtonGroup(); 
 		JRadioButton myTemp = new JRadioButton("Temperature (F)"), 
 					 myWind = new JRadioButton("Wind Speed (mph)"),
@@ -154,7 +152,7 @@ public class Alerts extends JFrame {
 		
 		this.add(leftPanel, BorderLayout.WEST);
 		this.add(rightPanel, BorderLayout.EAST);
-		setLocationRelativeTo(this);
+		
 		addAlert.addActionListener(new ActionListener() {
 			
 			@Override
@@ -263,7 +261,6 @@ public class Alerts extends JFrame {
 	 * @return the alarm button.
 	 */
 	public JButton getAlarmButton() {
-		
 		return alarmButton;
 	}
 
