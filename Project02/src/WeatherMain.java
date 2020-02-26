@@ -22,7 +22,7 @@ public class WeatherMain {
        
         try {
             //here you can put the selected theme class name in JTattoo
-            UIManager.setLookAndFeel( "com.jtattoo.plaf.noire.NoireLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
 
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(WeatherMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
