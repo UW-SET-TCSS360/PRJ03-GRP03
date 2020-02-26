@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -121,16 +122,20 @@ public class Alerts extends JFrame {
 					 myPressure = new JRadioButton("Air Pressure (bar)");
 		String[] sign = {">"};
 		JComboBox<String> comboBox = new JComboBox<String>(sign);
+		comboBox.setPreferredSize(new Dimension(60,40));
+		comboBox.setMaximumSize(new Dimension(80,40));
 		
 		JPanel leftPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
+//		rightPanel.setPreferredSize(new Dimension(250,300));
 		
-		textValue.setPreferredSize(new Dimension(50,50));
+		textValue.setPreferredSize(new Dimension(50,25));
+		textValue.setMaximumSize(new Dimension(50,25));
 		textValue.setVisible(true);
 		textValue.setEnabled(true);
 		
 		leftPanel.setLayout(new GridLayout(2, 2));
-		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
+		rightPanel.setLayout(new BoxLayout(rightPanel, FlowLayout.LEFT));
 		
 		//Adding the components together.
 		buttonGroup.add(myTemp);
@@ -146,12 +151,13 @@ public class Alerts extends JFrame {
 		leftPanel.add(myRain);
 		leftPanel.add(myPressure);
 		
-		rightPanel.add(textValue);
 		rightPanel.add(comboBox);
+		rightPanel.add(textValue);
 		rightPanel.add(addAlert);
 		
-		this.add(leftPanel, BorderLayout.WEST);
-		this.add(rightPanel, BorderLayout.EAST);
+		this.add(leftPanel, BorderLayout.CENTER);
+		this.add(rightPanel, BorderLayout.SOUTH);
+		
 		
 		addAlert.addActionListener(new ActionListener() {
 			
@@ -169,8 +175,8 @@ public class Alerts extends JFrame {
 						alertMap.put("Wind Speed",  tempValue);
 
 						myFlag = true;
-						System.out.println(alertMap.get("Wind Speed"));
-						System.out.println("MAP SIZE: " + alertMap.size());
+//						System.out.println(alertMap.get("Wind Speed"));
+//						System.out.println("MAP SIZE: " + alertMap.size());
 					} else if (myRain.isSelected() && !textValue.getText().isEmpty()) {
 						alertMap.put("Rain",  tempValue);
 						myFlag = true;
@@ -199,9 +205,7 @@ public class Alerts extends JFrame {
 	 */
 	public void checkAlert() {
 		// check temperature against stored temp alert in map.
-		System.out.println("ANOTHER" + getAlertMap().size());
-		System.out.println("HELLO");
-		System.out.println("ALERTM MAP SIZE " + alertMap.size());
+		
 			if (alertMap.containsKey("Temp") && (myTemperature > alertMap.get("Temp"))) {
 				JOptionPane.showMessageDialog(new JFrame(),
 						"WARNING \n The Current temperature (fahrenheit) is greater than " + alertMap.get("Temp"));
@@ -212,7 +216,7 @@ public class Alerts extends JFrame {
 				JOptionPane.showMessageDialog(new JFrame(),
 						"WARNING \n The Current rainfall (in/h) is greater than " + alertMap.get("Rain"));
 			} else if (alertMap.containsKey("Wind Speed") && (myWindSpeed > alertMap.get("Wind Speed"))) {
-				System.out.println("HELLO");
+				
 				JOptionPane.showMessageDialog(new JFrame(),
 						"WARNING \n The Current wind speed (mph) is greater than " + alertMap.get("Wind Speed"));
 			}
@@ -237,7 +241,7 @@ public class Alerts extends JFrame {
 	 */
 	public void setWindSpeed(int theWind) {
 		myWindSpeed = theWind / 1.0;
-		System.out.println(myWindSpeed);
+//		System.out.println(myWindSpeed);
 	}
 	
 	/**
