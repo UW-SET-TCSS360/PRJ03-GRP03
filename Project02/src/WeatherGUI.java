@@ -158,7 +158,7 @@ public class WeatherGUI extends JFrame {
         JFrame frame = new JFrame();
         JPanel tempPanel = new JPanel();
         tempPanel.setBorder(BorderFactory.createLineBorder(Color.white));
-        tempReadout = new JLabel("Temp: -- °F");
+        tempReadout = new JLabel("Temp: -- Â°F");
         tempPanel.add(tempReadout);
 
         JPanel humidPanel = new JPanel();
@@ -477,7 +477,7 @@ public class WeatherGUI extends JFrame {
     public void setTemp(int temp) {
         String raw = Integer.toString(temp);
         tempReadout
-                .setText("Temp: " + raw.substring(0, raw.length() - 1) + "." + raw.substring(raw.length() - 1) + " °F");
+                .setText("Temp: " + raw.substring(0, raw.length() - 1) + "." + raw.substring(raw.length() - 1) + " Â°F");
         if (graphPanel != null) {
             graphPanel.updateSensorValue(GraphPanel.TEMP_SENSOR, temp);
         }
