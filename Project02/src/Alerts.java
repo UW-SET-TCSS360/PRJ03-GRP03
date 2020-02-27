@@ -74,10 +74,13 @@ public class Alerts extends JFrame {
 		alarmButton = new JButton("Alerts");
 		alertMap = new HashMap<>();
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setSize(new Dimension(300,400));
+		this.setSize(new Dimension(450,500));
 		this.setTitle("Alert and Alarms");
-		myFlag = false;
+		this.setResizable(false);
 		
+		myFlag = false;
+//		setLocationRelativeTo(this);
+//		setResizable(false);
 		this.addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -98,6 +101,7 @@ public class Alerts extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Alerts.this.setVisible(true);
+				Alerts.this.setResizable(false);
 			}
 		});
 		
@@ -125,7 +129,7 @@ public class Alerts extends JFrame {
 		JPanel leftPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
 		
-		textValue.setPreferredSize(new Dimension(50,50));
+		textValue.setPreferredSize(new Dimension(30,80));
 		textValue.setVisible(true);
 		textValue.setEnabled(true);
 		
