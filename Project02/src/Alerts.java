@@ -77,9 +77,11 @@ public class Alerts extends JFrame {
 		this.setSize(new Dimension(450,500));
 		this.setTitle("Alert and Alarms");
 		this.setResizable(false);
+		this.setLocationRelativeTo(this);
+		
 		
 		myFlag = false;
-//		setLocationRelativeTo(this);
+		
 //		setResizable(false);
 		this.addWindowListener(new WindowAdapter() {
 			
