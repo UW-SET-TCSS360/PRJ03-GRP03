@@ -1,3 +1,4 @@
+package Weather;
 
 import java.nio.ByteBuffer;
 import java.util.Date;
@@ -6,8 +7,8 @@ import java.util.Random;
 /**
  * Weather Controller class that extracts the data from the packets sent by WeatherStation.
  * Sends that data over to the WeatherGUI.
- * @author Group 6
- * Version January 26, 2020
+ * @author Group 1
+ * Version February 26, 2020
  */
 public class WeatherController implements Runnable {
 

@@ -1,3 +1,4 @@
+package Weather;
 import java.awt.Component;
 
 import javax.swing.JFrame;
